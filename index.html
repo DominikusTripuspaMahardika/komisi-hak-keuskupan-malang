@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="id" class="komisi-hak-keuskupan-malang-html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio Link - Komisi HAK Keuskupan Malang</title>
+    <!-- Google Fonts - Poppins untuk tampilan modern dan bersih -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet"><!-- Google Material Icons - Ikon resmi dari Google -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap 5 CSS - Framework styling responsif -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Element SDK untuk integrasi Canva -->
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+        /* ============================================
+           CSS VARIABEL - TEMA TERANG DAN GELAP
+           Memudahkan pergantian warna secara konsisten
+        ============================================ */
+        :root {
+            /* Warna Tema Terang */
+            --komisi-hak-bg-primary: #f8f9fa;
+            --komisi-hak-bg-secondary: #ffffff;
+            --komisi-hak-text-primary: #1a1a2e;
+            --komisi-hak-text-secondary: #4a4a6a;
+            --komisi-hak-accent: #2c5530;
+            --komisi-hak-accent-hover: #3d7a42;
+            --komisi-hak-border: #e0e0e0;
+            --komisi-hak-shadow: rgba(0, 0, 0, 0.08);
+            --komisi-hak-card-bg: #ffffff;
+            --komisi-hak-gradient-start: #2c5530;
+            --komisi-hak-gradient-end: #4a7c50;
+        }
+
+        /* Tema Gelap - Aktif saat class dark-theme ditambahkan */
+        .komisi-hak-keuskupan-malang-dark-theme {
+            --komisi-hak-bg-primary: #0d1117;
+            --komisi-hak-bg-secondary: #161b22;
+            --komisi-hak-text-primary: #f0f6fc;
+            --komisi-hak-text-secondary: #8b949e;
+            --komisi-hak-accent: #4a9f5a;
+            --komisi-hak-accent-hover: #5cb86c;
+            --komisi-hak-border: #30363d;
+            --komisi-hak-shadow: rgba(0, 0, 0, 0.3);
+            --komisi-hak-card-bg: #21262d;
+            --komisi-hak-gradient-start: #238636;
+            --komisi-hak-gradient-end: #2ea043;
+        }
+
+        /* ============================================
+           LOADING SCREEN - Animasi pembuka halaman
+           Tampil sebelum konten utama dimuat
+        ============================================ */
+        .komisi-hak-keuskupan-malang-loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--komisi-hak-gradient-start), var(--komisi-hak-gradient-end));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        /* Menyembunyikan loading screen dengan animasi fade */
+        .komisi-hak-keuskupan-malang-loading-screen.komisi-hak-keuskupan-malang-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Spinner modern dengan animasi putar */
+        .komisi-hak-keuskupan-malang-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: komisi-hak-spin 1s linear infinite;
+        }
+
+        /* Lingkaran kedua untuk efek visual lebih menarik */
+        .komisi-hak-keuskupan-malang-spinner-outer {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-top-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: absolute;
+            animation: komisi-hak-spin 1.5s linear infinite reverse;
+        }
+
+        /* Keyframe animasi rotasi */
+        @keyframes komisi-hak-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================
+           STYLING DASAR - Layout dan tipografi
+        ============================================ */
+        .komisi-hak-keuskupan-malang-html,
+        .komisi-hak-keuskupan-malang-body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .komisi-hak-keuskupan-malang-body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--komisi-hak-bg-primary);
+            color: var(--komisi-hak-text-primary);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            line-height: 1.6;
+        }
+
+        /* Container utama aplikasi */
+        .komisi-hak-keuskupan-malang-app-wrapper {
+            width: 100%;
+            min-height: 100%;
+            background-color: var(--komisi-hak-bg-primary);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Container konten dengan lebar maksimal */
+        .komisi-hak-keuskupan-malang-container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 24px 16px 40px;
+        }
+
+        /* ============================================
+           HEADER - Logo dan informasi organisasi
+        ============================================ */
+        .komisi-hak-keuskupan-malang-header {
+            text-align: center;
+            margin-bottom: 32px;
+            animation: komisi-hak-fadeInUp 0.8s ease;
+        }
+
+        /* Container logo dengan styling circular */
+        .komisi-hak-keuskupan-malang-logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 8px 32px var(--komisi-hak-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 4px solid var(--komisi-hak-accent);
+        }
+
+        .komisi-hak-keuskupan-malang-logo {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        /* Placeholder logo jika gambar belum dimuat */
+        .komisi-hak-keuskupan-malang-logo-placeholder {
+            font-size: 48px;
+            color: var(--komisi-hak-accent);
+        }
+
+        .komisi-hak-keuskupan-malang-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--komisi-hak-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .komisi-hak-keuskupan-malang-tagline {
+            font-size: 0.9rem;
+            color: var(--komisi-hak-accent);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* ============================================
+           TOGGLE TEMA - Tombol pergantian tema
+        ============================================ */
+        .komisi-hak-keuskupan-malang-theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--komisi-hak-card-bg);
+            border: 2px solid var(--komisi-hak-border);
+            box-shadow: 0 4px 16px var(--komisi-hak-shadow);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .komisi-hak-keuskupan-malang-theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 24px var(--komisi-hak-shadow);
+        }
+
+        .komisi-hak-keuskupan-malang-theme-toggle .material-icons {
+            font-size: 24px;
+            color: var(--komisi-hak-accent);
+        }
+
+        /* ============================================
+           CARD STYLING - Komponen kartu informasi
+        ============================================ */
+        .komisi-hak-keuskupan-malang-card {
+            background: var(--komisi-hak-card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px var(--komisi-hak-shadow);
+            border: 1px solid var(--komisi-hak-border);
+            transition: all 0.3s ease;
+        }
+
+        .komisi-hak-keuskupan-malang-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--komisi-hak-shadow);
+        }
+
+        .komisi-hak-keuskupan-malang-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--komisi-hak-text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .komisi-hak-keuskupan-malang-card-title .material-icons {
+            color: var(--komisi-hak-accent);
+            font-size: 24px;
+        }
+
+        .komisi-hak-keuskupan-malang-description {
+            font-size: 0.95rem;
+            color: var(--komisi-hak-text-secondary);
+            line-height: 1.8;
+            text-align: justify;
+            white-space: pre-line;
+        }
+
+        /* ============================================
+           VISI MISI - Layout khusus visi dan misi
+        ============================================ */
+        .komisi-hak-keuskupan-malang-visi-misi-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .komisi-hak-keuskupan-malang-visi-card,
+        .komisi-hak-keuskupan-malang-misi-card {
+            background: linear-gradient(135deg, var(--komisi-hak-card-bg), var(--komisi-hak-bg-secondary));
+            border-left: 4px solid var(--komisi-hak-accent);
+        }
+
+        .komisi-hak-keuskupan-malang-misi-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .komisi-hak-keuskupan-malang-misi-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--komisi-hak-border);
+        }
+
+        .komisi-hak-keuskupan-malang-misi-item:last-child {
+            border-bottom: none;
+        }
+
+        .komisi-hak-keuskupan-malang-misi-icon {
+            color: var(--komisi-hak-accent);
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .komisi-hak-keuskupan-malang-misi-text {
+            font-size: 0.9rem;
+            color: var(--komisi-hak-text-secondary);
+        }
+
+        /* ============================================
+           TOMBOL MEDIA SOSIAL - Styling modern
+        ============================================ */
+        .komisi-hak-keuskupan-malang-social-section {
+            margin-bottom: 24px;
+        }
+
+        .komisi-hak-keuskupan-malang-section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--komisi-hak-text-primary);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .komisi-hak-keuskupan-malang-social-btn {
+            display: flex;
+            align-items: center;
+            /* INI PENTING */
+            justify-content: flex-start;
+            gap: 16px;
+            /* Lebih rapi daripada margin-right */
+            width: 100%;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            background: var(--komisi-hak-card-bg);
+            border: 1px solid var(--komisi-hak-border);
+            box-shadow: 0 4px 16px var(--komisi-hak-shadow);
+            text-decoration: none;
+            color: var(--komisi-hak-text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .komisi-hak-keuskupan-malang-social-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px var(--komisi-hak-shadow), 0 0 20px rgba(76, 175, 80, 0.2);
+            border-color: var(--komisi-hak-accent);
+            color: var(--komisi-hak-text-primary);
+        }
+
+        .komisi-hak-keuskupan-malang-social-btn .material-icons {
+            font-size: 28px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Warna ikon untuk setiap platform */
+        .komisi-hak-keuskupan-malang-youtube .material-icons {
+            color: #FF0000;
+        }
+
+        .komisi-hak-keuskupan-malang-instagram .material-icons {
+            color: #E4405F;
+        }
+
+        .komisi-hak-keuskupan-malang-facebook .material-icons {
+            color: #1877F2;
+        }
+
+        .komisi-hak-keuskupan-malang-tiktok .material-icons {
+            color: #000000;
+        }
+
+        .komisi-hak-keuskupan-malang-dark-theme .komisi-hak-keuskupan-malang-tiktok .material-icons {
+            color: #ffffff;
+        }
+
+        .komisi-hak-keuskupan-malang-snackvideo .material-icons {
+            color: #FFE812;
+        }
+
+        .komisi-hak-keuskupan-malang-likee .material-icons {
+            color: #00D9FF;
+        }
+
+        /* ============================================
+           FORM KONTAK - Input dan validasi
+        ============================================ */
+        .komisi-hak-keuskupan-malang-form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .komisi-hak-keuskupan-malang-form-input {
+            width: 100%;
+            padding: 16px 16px 16px 48px;
+            border: 2px solid var(--komisi-hak-border);
+            border-radius: 12px;
+            background: var(--komisi-hak-card-bg);
+            color: var(--komisi-hak-text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .komisi-hak-keuskupan-malang-form-input:focus {
+            outline: none;
+            border-color: var(--komisi-hak-accent);
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+        }
+
+        .komisi-hak-keuskupan-malang-form-input.komisi-hak-keuskupan-malang-invalid {
+            border-color: #dc3545;
+        }
+
+        .komisi-hak-keuskupan-malang-form-input.komisi-hak-keuskupan-malang-valid {
+            border-color: var(--komisi-hak-accent);
+        }
+
+        .komisi-hak-keuskupan-malang-form-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--komisi-hak-text-secondary);
+            font-size: 20px;
+        }
+
+        .komisi-hak-keuskupan-malang-form-group-textarea .komisi-hak-keuskupan-malang-form-icon {
+            top: 20px;
+            transform: none;
+        }
+
+        .komisi-hak-keuskupan-malang-form-label {
+            position: absolute;
+            left: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--komisi-hak-text-secondary);
+            font-size: 0.95rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            background: transparent;
+            padding: 0 4px;
+        }
+
+        .komisi-hak-keuskupan-malang-form-group-textarea .komisi-hak-keuskupan-malang-form-label {
+            top: 20px;
+            transform: none;
+        }
+
+        /* Label mengambang saat input fokus atau terisi */
+        .komisi-hak-keuskupan-malang-form-input:focus~.komisi-hak-keuskupan-malang-form-label,
+        .komisi-hak-keuskupan-malang-form-input:not(:placeholder-shown)~.komisi-hak-keuskupan-malang-form-label {
+            top: -10px;
+            left: 12px;
+            font-size: 0.75rem;
+            color: var(--komisi-hak-accent);
+            background: var(--komisi-hak-card-bg);
+            transform: none;
+        }
+
+        .komisi-hak-keuskupan-malang-form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .komisi-hak-keuskupan-malang-error-message {
+            color: #dc3545;
+            font-size: 0.8rem;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .komisi-hak-keuskupan-malang-error-message .material-icons {
+            font-size: 16px;
+        }
+
+        /* Tombol kirim dengan styling gradient */
+        .komisi-hak-keuskupan-malang-submit-btn {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--komisi-hak-gradient-start), var(--komisi-hak-gradient-end));
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(76, 175, 80, 0.3);
+        }
+
+        .komisi-hak-keuskupan-malang-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(76, 175, 80, 0.4);
+        }
+
+        .komisi-hak-keuskupan-malang-submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ============================================
+   TOAST NOTIFICATION - Professional Version
+============================================ */
+
+        .komisi-hak-keuskupan-malang-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(40px);
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 14px 20px;
+            border-radius: 14px;
+
+            background: rgba(30, 41, 59, 0.95);
+            /* Dark glass modern */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 500;
+
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s cubic-bezier(.4, 0, .2, 1);
+
+            z-index: 1000;
+            max-width: 420px;
+            width: calc(100% - 32px);
+        }
+
+        /* Saat aktif */
+        .komisi-hak-keuskupan-malang-toast.komisi-hak-keuskupan-malang-show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Icon */
+        .komisi-hak-keuskupan-malang-toast .material-icons {
+            font-size: 22px;
+            color: #4ade80;
+            /* success green modern */
+        }
+
+        /* ============================================
+           FOOTER - Informasi copyright
+        ============================================ */
+        .komisi-hak-keuskupan-malang-footer {
+            text-align: center;
+            padding: 24px 16px;
+            color: var(--komisi-hak-text-secondary);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--komisi-hak-border);
+            margin-top: 16px;
+        }
+
+        .komisi-hak-keuskupan-malang-footer a {
+            color: var(--komisi-hak-accent);
+            text-decoration: none;
+        }
+
+        /* ============================================
+           ANIMASI - Efek visual halaman
+        ============================================ */
+        @keyframes komisi-hak-fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .komisi-hak-keuskupan-malang-animate-fadeInUp {
+            animation: komisi-hak-fadeInUp 0.6s ease forwards;
+        }
+
+        /* Animasi stagger untuk elemen berurutan */
+        .komisi-hak-keuskupan-malang-stagger-1 {
+            animation-delay: 0.1s;
+        }
+
+        .komisi-hak-keuskupan-malang-stagger-2 {
+            animation-delay: 0.2s;
+        }
+
+        .komisi-hak-keuskupan-malang-stagger-3 {
+            animation-delay: 0.3s;
+        }
+
+        .komisi-hak-keuskupan-malang-stagger-4 {
+            animation-delay: 0.4s;
+        }
+
+        .komisi-hak-keuskupan-malang-stagger-5 {
+            animation-delay: 0.5s;
+        }
+
+        .komisi-hak-keuskupan-malang-stagger-6 {
+            animation-delay: 0.6s;
+        }
+
+        /* Responsif untuk tablet dan desktop */
+        @media (min-width: 768px) {
+            .komisi-hak-keuskupan-malang-container {
+                padding: 40px 24px 60px;
+            }
+
+            .komisi-hak-keuskupan-malang-logo-container {
+                width: 140px;
+                height: 140px;
+            }
+
+            .komisi-hak-keuskupan-malang-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        .komisi-hak-keuskupan-malang-social-icon {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            margin-right: 16px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .komisi-hak-keuskupan-malang-social-btn span {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ============================================
+   STRUKTUR ORGANISASI
+============================================ */
+
+.komisi-hak-keuskupan-malang-struktur-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.komisi-hak-keuskupan-malang-struktur-item {
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--komisi-hak-bg-secondary);
+    border-left: 4px solid var(--komisi-hak-accent);
+    box-shadow: 0 4px 12px var(--komisi-hak-shadow);
+    transition: all 0.3s ease;
+}
+
+.komisi-hak-keuskupan-malang-struktur-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--komisi-hak-shadow);
+}
+
+.komisi-hak-keuskupan-malang-struktur-item h5 {
+    font-weight: 600;
+    color: var(--komisi-hak-accent);
+    margin-bottom: 8px;
+}
+
+.komisi-hak-keuskupan-malang-struktur-item p {
+    font-size: 0.9rem;
+    color: var(--komisi-hak-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+    </style>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="komisi-hak-keuskupan-malang-body"><!-- 
+        VUE APP CONTAINER
+        Seluruh aplikasi dibungkus dalam div ini untuk Vue mounting
+    -->
+    <div id="komisi-hak-keuskupan-malang-app" class="komisi-hak-keuskupan-malang-app-wrapper"><!-- 
+            LOADING SCREEN
+            Ditampilkan saat halaman pertama kali dimuat
+            Menggunakan spinner ganda untuk efek visual menarik
+        -->
+        <div class="komisi-hak-keuskupan-malang-loading-screen"
+            :class="{ 'komisi-hak-keuskupan-malang-hidden': !isLoading }">
+            <div class="komisi-hak-keuskupan-malang-spinner-outer"></div>
+            <div class="komisi-hak-keuskupan-malang-spinner"></div>
+        </div><!-- 
+            TOMBOL TOGGLE TEMA
+            Mengubah antara tema terang dan gelap
+        --> <button class="komisi-hak-keuskupan-malang-theme-toggle" @click="toggleTheme"
+            :title="isDarkTheme ? 'Mode Terang' : 'Mode Gelap'"> <span class="material-icons">{{ isDarkTheme ?
+                'light_mode' : 'dark_mode' }}</span> </button> <!-- CONTAINER KONTEN UTAMA -->
+        <div class="komisi-hak-keuskupan-malang-container"><!-- 
+                HEADER SECTION
+                Menampilkan logo dan nama organisasi
+            -->
+            <header class="komisi-hak-keuskupan-malang-header">
+                <div class="komisi-hak-keuskupan-malang-logo-container">
+                    <!-- Logo dengan fallback ke placeholder jika gagal dimuat --> <img
+                        v-if="logoUrl &amp;&amp; !logoError" :src="logoUrl" :alt="organizationName"
+                        class="komisi-hak-keuskupan-malang-logo" @error="logoError = true" loading="lazy">
+                    <!-- Ikon placeholder jika logo tidak tersedia --> <span v-else
+                        class="material-icons komisi-hak-keuskupan-malang-logo-placeholder"> groups </span>
+                </div>
+                <h1 class="komisi-hak-keuskupan-malang-title">{{ organizationName }}</h1>
+                <p class="komisi-hak-keuskupan-malang-tagline">{{ tagline }}</p>
+            </header><!-- 
+                TENTANG KAMI
+                Ringkasan resmi organisasi
+            -->
+            <section
+                class="komisi-hak-keuskupan-malang-card komisi-hak-keuskupan-malang-animate-fadeInUp komisi-hak-keuskupan-malang-stagger-1">
+                <h2 class="komisi-hak-keuskupan-malang-card-title"><span class="material-icons">info</span> Tentang Kami
+                </h2>
+                <p class="komisi-hak-keuskupan-malang-description">{{ aboutDescription }}</p>
+            </section><!-- 
+                VISI DAN MISI
+                Ditampilkan dalam format card terpisah
+            -->
+            <section
+                class="komisi-hak-keuskupan-malang-visi-misi-grid komisi-hak-keuskupan-malang-animate-fadeInUp komisi-hak-keuskupan-malang-stagger-2">
+                <!-- Card Visi -->
+                <div class="komisi-hak-keuskupan-malang-card komisi-hak-keuskupan-malang-visi-card">
+                    <h2 class="komisi-hak-keuskupan-malang-card-title"><span class="material-icons">visibility</span>
+                        Visi</h2>
+                    <p class="komisi-hak-keuskupan-malang-description">{{ visi }}</p>
+                </div><!-- Card Misi -->
+                <div class="komisi-hak-keuskupan-malang-card komisi-hak-keuskupan-malang-misi-card">
+                    <h2 class="komisi-hak-keuskupan-malang-card-title"><span class="material-icons">flag</span> Misi
+                    </h2>
+                    <ul class="komisi-hak-keuskupan-malang-misi-list">
+                        <li v-for="(item, index) in misiList" :key="index"
+                            class="komisi-hak-keuskupan-malang-misi-item"><span
+                                class="material-icons komisi-hak-keuskupan-malang-misi-icon">check_circle</span> <span
+                                class="komisi-hak-keuskupan-malang-misi-text">{{ item }}</span></li>
+                    </ul>
+                </div>
+            </section>
+            <!-- 
+    STRUKTUR ORGANISASI
+    Data sesuai dokumen resmi (tanpa anggota)
+-->
+<section
+    class="komisi-hak-keuskupan-malang-card komisi-hak-keuskupan-malang-animate-fadeInUp komisi-hak-keuskupan-malang-stagger-3">
+
+    <h2 class="komisi-hak-keuskupan-malang-card-title">
+        <span class="material-icons">account_tree</span>
+        Struktur Organisasi
+    </h2>
+
+    <div class="komisi-hak-keuskupan-malang-struktur-wrapper">
+
+        <div class="komisi-hak-keuskupan-malang-struktur-item">
+            <h5>Ketua</h5>
+            <p><strong>Rm. Henrikus Suwaji O Carm</strong><br>
+                Alamat: Gereja St. Theresia - Margabakti Gempol-Sukun, Tanjungrejo - Kec. Sukun<br>
+                No HP: 0813-1068-9111<br>
+                Email: romosuwaji@gmail.com
+            </p>
+        </div>
+
+        <div class="komisi-hak-keuskupan-malang-struktur-item">
+            <h5>Wakil Ketua</h5>
+            <p><strong>Irenius Sola</strong><br>
+                Alamat: Jln. Ananas 41 Malang<br>
+                No HP: 081235471642<br>
+                Email: ireneusolawene@gmail.com
+            </p>
+        </div>
+
+        <div class="komisi-hak-keuskupan-malang-struktur-item">
+            <h5>Sekretaris I</h5>
+            <p><strong>Sr. Annunciata, PI</strong><br>
+                Alamat: Susteran Sang Timur, Jln. Bandulan Barat 40<br>
+                No HP: 0812 5251 7857<br>
+                Email: sr.annunciatapi@gmail.com
+            </p>
+        </div>
+
+        <div class="komisi-hak-keuskupan-malang-struktur-item">
+            <h5>Sekretaris II</h5>
+            <p><strong>Sr. Marlina, H. Carm</strong><br>
+                Alamat: Jln. Pandeglang Malang<br>
+                No HP: 081-261100676
+            </p>
+        </div>
+
+        <div class="komisi-hak-keuskupan-malang-struktur-item">
+            <h5>Bendahara I</h5>
+            <p><strong>Sr. Skolastika Misc</strong><br>
+                Alamat: Susteran Misericordia, Jl. Nusakambangan 56 Malang<br>
+                No HP: 0813-33316873
+            </p>
+        </div>
+
+        <div class="komisi-hak-keuskupan-malang-struktur-item">
+            <h5>Bendahara II</h5>
+            <p><strong>Sr. Reliana, H. Carm</strong><br>
+                Alamat: Jln. Pandeglang Malang<br>
+                No HP: 0821-23102700<br>
+                Email: relianav@yahoo.com
+            </p>
+        </div>
+
+    </div>
+
+</section>
+            <!-- 
+                MEDIA SOSIAL
+                Tombol-tombol link ke platform sosial media
+            -->
+            <section
+                class="komisi-hak-keuskupan-malang-social-section komisi-hak-keuskupan-malang-animate-fadeInUp komisi-hak-keuskupan-malang-stagger-3">
+
+                <h2 class="komisi-hak-keuskupan-malang-section-title">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">share</span>
+                    Ikuti Media Sosial Kami
+                </h2>
+
+                <a v-for="(social, index) in socialLinks" :key="social.name" :href="social.url" target="_blank"
+                    rel="noopener noreferrer" class="komisi-hak-keuskupan-malang-social-btn"
+                    :class="'komisi-hak-keuskupan-malang-' + social.class">
+
+                    <img :src="social.icon" :alt="social.name" class="komisi-hak-keuskupan-malang-social-icon">
+
+                    <span>{{ social.name }}</span>
+
+                </a>
+            </section>
+            <!-- 
+                FORM KONTAK
+                Input tervalidasi dengan Vue.js
+            -->
+            <section
+                class="komisi-hak-keuskupan-malang-card komisi-hak-keuskupan-malang-animate-fadeInUp komisi-hak-keuskupan-malang-stagger-4">
+                <h2 class="komisi-hak-keuskupan-malang-card-title"><span class="material-icons">mail</span> Hubungi Kami
+                </h2>
+                <form @submit.prevent="handleSubmit"><!-- Input Nama -->
+                    <div class="komisi-hak-keuskupan-malang-form-group"><span
+                            class="material-icons komisi-hak-keuskupan-malang-form-icon">person</span> <input
+                            type="text" id="komisi-hak-keuskupan-malang-nama" v-model="form.nama"
+                            class="komisi-hak-keuskupan-malang-form-input" :class="{
+                                'komisi-hak-keuskupan-malang-invalid': errors.nama,
+                                'komisi-hak-keuskupan-malang-valid': form.nama &amp;&amp; !errors.nama
+                            }" placeholder=" " @blur="validateNama"> <label for="komisi-hak-keuskupan-malang-nama"
+                            class="komisi-hak-keuskupan-malang-form-label">Nama Lengkap</label>
+                        <div v-if="errors.nama" class="komisi-hak-keuskupan-malang-error-message"><span
+                                class="material-icons">error</span> {{ errors.nama }}
+                        </div>
+                    </div><!-- Input Email -->
+                    <div class="komisi-hak-keuskupan-malang-form-group"><span
+                            class="material-icons komisi-hak-keuskupan-malang-form-icon">email</span> <input
+                            type="email" id="komisi-hak-keuskupan-malang-email" v-model="form.email"
+                            class="komisi-hak-keuskupan-malang-form-input" :class="{
+                                'komisi-hak-keuskupan-malang-invalid': errors.email,
+                                'komisi-hak-keuskupan-malang-valid': form.email &amp;&amp; !errors.email
+                            }" placeholder=" " @blur="validateEmail"> <label for="komisi-hak-keuskupan-malang-email"
+                            class="komisi-hak-keuskupan-malang-form-label">Alamat Email</label>
+                        <div v-if="errors.email" class="komisi-hak-keuskupan-malang-error-message"><span
+                                class="material-icons">error</span> {{ errors.email }}
+                        </div>
+                    </div><!-- Input Pesan -->
+                    <div class="komisi-hak-keuskupan-malang-form-group komisi-hak-keuskupan-malang-form-group-textarea">
+                        <span class="material-icons komisi-hak-keuskupan-malang-form-icon">message</span> <textarea
+                            id="komisi-hak-keuskupan-malang-pesan" v-model="form.pesan"
+                            class="komisi-hak-keuskupan-malang-form-input komisi-hak-keuskupan-malang-form-textarea"
+                            :class="{
+                                'komisi-hak-keuskupan-malang-invalid': errors.pesan,
+                                'komisi-hak-keuskupan-malang-valid': form.pesan &amp;&amp; !errors.pesan
+                            }" placeholder=" " @blur="validatePesan"></textarea> <label
+                            for="komisi-hak-keuskupan-malang-pesan" class="komisi-hak-keuskupan-malang-form-label">Pesan
+                            Anda</label>
+                        <div v-if="errors.pesan" class="komisi-hak-keuskupan-malang-error-message"><span
+                                class="material-icons">error</span> {{ errors.pesan }}
+                        </div>
+                    </div><!-- Tombol Kirim --> <button type="submit" class="komisi-hak-keuskupan-malang-submit-btn"
+                        :disabled="!isFormValid"> <span class="material-icons">send</span> Kirim Pesan </button>
+                </form>
+            </section><!-- FOOTER -->
+            <footer class="komisi-hak-keuskupan-malang-footer">
+                <p>© {{ currentYear }} {{ organizationName }}</p>
+                <p>Keuskupan Malang</p>
+            </footer>
+        </div><!-- 
+            TOAST NOTIFICATION
+            Notifikasi sukses tanpa alert browser
+        -->
+        <div class="komisi-hak-keuskupan-malang-toast" :class="{ 'komisi-hak-keuskupan-malang-show': showToast }"><span
+                class="material-icons">check_circle</span> <span>{{ toastMessage }}</span>
+        </div>
+    </div><!-- Vue 3 CDN - Framework JavaScript reaktif -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Bootstrap JS CDN - Komponen interaktif Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ============================================
+        // VUE APPLICATION
+        // Konfigurasi dan logika utama aplikasi
+        // ============================================
+
+        const { createApp, ref, computed, onMounted } = Vue;
+
+        const app = createApp({
+            setup() {
+                // ----------------------------------------
+                // STATE MANAGEMENT - Variabel reaktif Vue
+                // ----------------------------------------
+
+                // Status loading screen
+                const isLoading = ref(true);
+
+                // Status tema (terang/gelap)
+                const isDarkTheme = ref(false);
+
+                // Status error logo
+                const logoError = ref(false);
+
+                // ----------------------------------------
+                // KONFIGURASI ORGANISASI
+                // Mudah diubah sesuai kebutuhan
+                // ----------------------------------------
+
+                // Path logo - ubah nilai ini untuk mengganti logo
+                const logoUrl = ref('img/logo/Logo-KOM-HAK.png');
+
+                // Nama organisasi
+                const organizationName = ref('Komisi HAK Keuskupan Malang');
+
+                // Tagline organisasi
+                const tagline = ref('Persaudaraan • Dialog • Harmoni');
+
+                // Deskripsi tentang organisasi (TIDAK DIUBAH sesuai permintaan)
+                // Deskripsi About - Multi Paragraf Aman
+                const aboutDescription = ref(`
+                Komisi HAK merupakan perpanjangan Gereja Keuskupan Malang untuk ikut mewujudkan persaudaraan sejati dan kerjasama antara umat Katolik dengan umat beragama lain serta penghayat / kepercayaan.
+
+                Dalam banyak kegiatan, komisi HAK berusaha memotivasi umat beriman Katolik di wilayah Keuskupan Malang agar terlibat secara sadar dan aktif dalam kegiatan-kegiatan kemasyarakatan serta keagamaan demi terwujudnya persaudaraan sejati dan berkembangnya moderasi beragama di tataran akar rumput lebih-lebih di kalangan orang muda.
+
+                Oleh karena itu, komisi HAK memfasilitasi kebutuhan akan dialog dan kerjasama antara umat Katolik di wilayah Keuskupan Malang dengan umat beragama lain serta penghayat / kepercayaan melalui kegiatan-kegiatan lintas iman.
+                
+                Pemangku tanggung jawab dalam kepengurusan saat ini, sebagian besar adalah para imam dan biarawati yang berdomisili di wilayah keuskupan Malang. Maka konsekuensi logis dadri realitas tersebut adalah mutasi pengurus karena tugas tarekat.
+                `);
+
+                // Visi organisasi
+                const visi = ref('Terwujudnya persaudaraan sejati dan kerjasama antara umat katolik dengan umat beragama lain serta Penghayat / kepercayaan.');
+
+                // Misi organisasi dalam bentuk list
+                const misiList = ref([
+                    'Mewujudkan persaudaraan sejati dan kerjasama antara umat Katolik dengan umat beragama lain serta penghayat /kepercayaan.',
+                    'Memotivasi umat beriman Katolik di wilayah Keuskupan Malang untuk terlibat secara sadar dan aktif dalam kegiatan-kegiatan kemasyarakatan serta keagamaan demi terwujudnya persaudaraan sejati.',
+                    'Menggerakkan umat beriman Katolik di wilayah Keuskupan Malang agar lebih peduli dalam kegiatan-kegiatan dialog antar umat beragama dan penghayat/kepercayaan lain.',
+                    'Memfasilitasi kebutuhan akan dialog dan kerjasama antara umat Katolik di wilayah Keuskupan Malang dengan umat beragama lain serta penghayat/kepercayaan melalui kegiatan-kegiatan lintas iman.'
+                ]);
+
+                // ----------------------------------------
+                // DATA MEDIA SOSIAL
+                // Konfigurasi tombol dan tautan
+                // ----------------------------------------
+                const socialLinks = ref([
+                    {
+                        name: 'YouTube',
+                        url: 'https://www.youtube.com/@KomisiHAKKeuskupanMalang',
+                        icon: 'img/icon/youtube.png',
+                        class: 'youtube'
+                    },
+                    {
+                        name: 'Instagram',
+                        url: 'https://www.instagram.com/komisihak.keuskupanmalang',
+                        icon: 'img/icon/instagram.png',
+                        class: 'instagram'
+                    },
+                    {
+                        name: 'Facebook',
+                        url: 'https://www.facebook.com/share/1ae44Z7kpn/',
+                        icon: 'img/icon/facebook.png',
+                        class: 'facebook'
+                    },
+                    {
+                        name: 'TikTok',
+                        url: 'https://www.tiktok.com/@komisi.hak.keusku?_r=1&_t=ZS-94EYROBJsUX',
+                        icon: 'img/icon/tiktok.png',
+                        class: 'tiktok'
+                    },
+                    {
+                        name: 'Snack Video',
+                        url: 'https://s.snackvideo.com/u/@komisihakmlg/HTHKvdap',
+                        icon: 'img/icon/snackvideo.png',
+                        class: 'snackvideo'
+                    },
+                    {
+                        name: 'Likee',
+                        url: 'https://l.likee.video/p/4P8cfA',
+                        icon: 'img/icon/likee.png',
+                        class: 'likee'
+                    }
+                ]);
+
+                // ----------------------------------------
+                // FORM STATE DAN VALIDASI
+                // ----------------------------------------
+
+                // Data form
+                const form = ref({
+                    nama: '',
+                    email: '',
+                    pesan: ''
+                });
+
+                // Pesan error validasi
+                const errors = ref({
+                    nama: '',
+                    email: '',
+                    pesan: ''
+                });
+
+                // Status toast notification
+                const showToast = ref(false);
+                const toastMessage = ref('');
+
+                // Tahun saat ini untuk copyright
+                const currentYear = ref(new Date().getFullYear());
+
+                // ----------------------------------------
+                // COMPUTED PROPERTIES
+                // Nilai yang dihitung otomatis
+                // ----------------------------------------
+
+                // Mengecek apakah form valid untuk dikirim
+                const isFormValid = computed(() => {
+                    return form.value.nama.trim().length >= 2 &&
+                        validateEmailFormat(form.value.email) &&
+                        form.value.pesan.trim().length >= 10 &&
+                        !errors.value.nama &&
+                        !errors.value.email &&
+                        !errors.value.pesan;
+                });
+
+                // ----------------------------------------
+                // METHODS - Fungsi-fungsi aplikasi
+                // ----------------------------------------
+
+                // Toggle tema terang/gelap
+                function toggleTheme() {
+                    isDarkTheme.value = !isDarkTheme.value;
+                    document.body.classList.toggle('komisi-hak-keuskupan-malang-dark-theme', isDarkTheme.value);
+                }
+
+                // Validasi format email menggunakan regex
+                function validateEmailFormat(email) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return emailRegex.test(email);
+                }
+
+                // Validasi input nama
+                function validateNama() {
+                    if (!form.value.nama.trim()) {
+                        errors.value.nama = 'Nama wajib diisi';
+                    } else if (form.value.nama.trim().length < 2) {
+                        errors.value.nama = 'Nama minimal 2 karakter';
+                    } else {
+                        errors.value.nama = '';
+                    }
+                }
+
+                // Validasi input email
+                function validateEmail() {
+                    if (!form.value.email.trim()) {
+                        errors.value.email = 'Email wajib diisi';
+                    } else if (!validateEmailFormat(form.value.email)) {
+                        errors.value.email = 'Format email tidak valid';
+                    } else {
+                        errors.value.email = '';
+                    }
+                }
+
+                // Validasi input pesan
+                function validatePesan() {
+                    if (!form.value.pesan.trim()) {
+                        errors.value.pesan = 'Pesan wajib diisi';
+                    } else if (form.value.pesan.trim().length < 10) {
+                        errors.value.pesan = 'Pesan minimal 10 karakter';
+                    } else {
+                        errors.value.pesan = '';
+                    }
+                }
+
+                // Handler submit form
+                function handleSubmit() {
+                    // Validasi semua field sebelum submit
+                    validateNama();
+                    validateEmail();
+                    validatePesan();
+
+                    // Jika form tidak valid, hentikan proses
+                    if (!isFormValid.value) {
+                        return;
+                    }
+
+                    // Encode data untuk mailto
+                    const subject = encodeURIComponent(`Pesan dari ${form.value.nama} - Bio Link Komisi HAK`);
+                    const body = encodeURIComponent(
+                        `Nama: ${form.value.nama}\n` +
+                        `Email: ${form.value.email}\n\n` +
+                        `Pesan:\n${form.value.pesan}`
+                    );
+
+                    // Buka mail client dengan data terisi
+                    const mailtoLink = `mailto:komisihak.keuskupanmalang@gmail.com?subject=${subject}&body=${body}`;
+                    window.open(mailtoLink, '_blank');
+
+                    // Tampilkan notifikasi sukses
+                    showToastNotification('Klien email berhasil dibuka. Mohon lanjutkan proses pengiriman pesan melalui aplikasi email Anda.');
+
+                    // Reset form setelah sukses
+                    form.value.nama = '';
+                    form.value.email = '';
+                    form.value.pesan = '';
+                }
+
+                // Menampilkan toast notification
+                function showToastNotification(message) {
+                    toastMessage.value = message;
+                    showToast.value = true;
+
+                    // Sembunyikan toast setelah 4 detik
+                    setTimeout(() => {
+                        showToast.value = false;
+                    }, 4000);
+                }
+
+                // ----------------------------------------
+                // LIFECYCLE HOOKS
+                // ----------------------------------------
+
+                onMounted(() => {
+                    // Sembunyikan loading screen setelah konten siap
+                    setTimeout(() => {
+                        isLoading.value = false;
+                    }, 1500);
+
+                    // Inisialisasi Element SDK untuk Canva
+                    if (window.elementSdk) {
+                        const defaultConfig = {
+                            organization_name: 'Komisi HAK Keuskupan Malang',
+                            tagline: 'Persaudaraan • Dialog • Harmoni',
+                            background_color: '#f8f9fa',
+                            card_color: '#ffffff',
+                            text_color: '#1a1a2e',
+                            accent_color: '#2c5530',
+                            secondary_text_color: '#4a4a6a'
+                        };
+
+                        window.elementSdk.init({
+                            defaultConfig,
+                            onConfigChange: async (config) => {
+                                // Update nilai berdasarkan konfigurasi
+                                if (config.organization_name) {
+                                    organizationName.value = config.organization_name;
+                                }
+                                if (config.tagline) {
+                                    tagline.value = config.tagline;
+                                }
+
+                                // Update warna tema
+                                const root = document.documentElement;
+                                if (config.background_color) {
+                                    root.style.setProperty('--komisi-hak-bg-primary', config.background_color);
+                                }
+                                if (config.card_color) {
+                                    root.style.setProperty('--komisi-hak-card-bg', config.card_color);
+                                }
+                                if (config.text_color) {
+                                    root.style.setProperty('--komisi-hak-text-primary', config.text_color);
+                                }
+                                if (config.accent_color) {
+                                    root.style.setProperty('--komisi-hak-accent', config.accent_color);
+                                }
+                                if (config.secondary_text_color) {
+                                    root.style.setProperty('--komisi-hak-text-secondary', config.secondary_text_color);
+                                }
+                            },
+                            mapToCapabilities: (config) => ({
+                                recolorables: [
+                                    {
+                                        get: () => config.background_color || defaultConfig.background_color,
+                                        set: (value) => {
+                                            config.background_color = value;
+                                            window.elementSdk.setConfig({ background_color: value });
+                                        }
+                                    },
+                                    {
+                                        get: () => config.card_color || defaultConfig.card_color,
+                                        set: (value) => {
+                                            config.card_color = value;
+                                            window.elementSdk.setConfig({ card_color: value });
+                                        }
+                                    },
+                                    {
+                                        get: () => config.text_color || defaultConfig.text_color,
+                                        set: (value) => {
+                                            config.text_color = value;
+                                            window.elementSdk.setConfig({ text_color: value });
+                                        }
+                                    },
+                                    {
+                                        get: () => config.accent_color || defaultConfig.accent_color,
+                                        set: (value) => {
+                                            config.accent_color = value;
+                                            window.elementSdk.setConfig({ accent_color: value });
+                                        }
+                                    },
+                                    {
+                                        get: () => config.secondary_text_color || defaultConfig.secondary_text_color,
+                                        set: (value) => {
+                                            config.secondary_text_color = value;
+                                            window.elementSdk.setConfig({ secondary_text_color: value });
+                                        }
+                                    }
+                                ],
+                                borderables: [],
+                                fontEditable: undefined,
+                                fontSizeable: undefined
+                            }),
+                            mapToEditPanelValues: (config) => new Map([
+                                ['organization_name', config.organization_name || defaultConfig.organization_name],
+                                ['tagline', config.tagline || defaultConfig.tagline]
+                            ])
+                        });
+                    }
+                });
+
+                // Return semua yang dibutuhkan template
+                return {
+                    isLoading,
+                    isDarkTheme,
+                    logoUrl,
+                    logoError,
+                    organizationName,
+                    tagline,
+                    aboutDescription,
+                    visi,
+                    misiList,
+                    socialLinks,
+                    form,
+                    errors,
+                    isFormValid,
+                    showToast,
+                    toastMessage,
+                    currentYear,
+                    toggleTheme,
+                    validateNama,
+                    validateEmail,
+                    validatePesan,
+                    handleSubmit
+                };
+            }
+        });
+
+        // Mount aplikasi Vue ke DOM
+        app.mount('#komisi-hak-keuskupan-malang-app');
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9d3ca4a621453e17',t:'MTc3MjA3OTU1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>
